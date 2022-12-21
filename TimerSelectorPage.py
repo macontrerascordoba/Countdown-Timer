@@ -52,7 +52,7 @@ class TimerSelectorPage(ttk.Frame):
 
         #START TIMER
         tpObj = tp.TimerPage(parent=parent, controller=controller)
-        startButton = ttk.Button(self, text="START TIMER", command=tpObj.startTimer(True))
+        startButton = ttk.Button(self, text="START TIMER", command=lambda: tpObj.startTimer())
         startButton.place(x=100, y=220)
 
     def changeValues(self, value, substract, label):

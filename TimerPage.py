@@ -47,50 +47,53 @@ class TimerPage(ttk.Frame):
         startButton.place(x=100, y=220)
 
     
-    def startTimer(self, start=False):
-
-        with open('public/time.json') as f:
-            data = json.load(f)
-            self.hours = data['hours']
-            self.minutes = data['minutes']
-            self.seconds = data['seconds']
-
-        if start:
+    def startTimer(self):
+        
+        if self.controller.finished:
 
             self.controller.showFrame('TimerPage')
+
+            with open('public/time.json') as f:
+                data = json.load(f)
+                self.hours = data['hours']
+                self.minutes = data['minutes']
+                self.seconds = data['seconds']
+
+            print(self.hours, self.minutes, self.seconds)
 
             seconds = self.controller.hours*3600 + self.controller.minutes*60 + self.controller.seconds
 
             self.hoursLabel.config(text=self.hoursSpace + str(self.hours))
             self.minutesLabel.config(text=self.minutesSpace + str(self.minutes))
             self.secondsLabel.config(text=self.secondsSpace + str(self.seconds))
+            
+            self.controller.update()
 
-            print('a')
+            # while (seconds >= 0):
 
-            while (seconds >= 0):
+            #     self.hoursLabel.config(text=self.hoursSpace + str(self.controller.hours))
+            #     self.minutesLabel.config(text=self.minutesSpace + str(self.controller.minutes))
+            #     self.secondsLabel.config(text=self.secondsSpace + str(self.controller.seconds))
 
-                self.hoursLabel.config(text=self.hoursSpace + str(self.controller.hours))
-                self.minutesLabel.config(text=self.minutesSpace + str(self.controller.minutes))
-                self.secondsLabel.config(text=self.secondsSpace + str(self.controller.seconds))
-
-                if (self.controller.seconds == 0):
-                    if (self.controller.minutes == 0):
-                        self.controller.hours -= 1
-                        self.controller.minutes = 59
-                        self.controller.seconds = 59
-                    else:
-                        self.controller.minutes -= 1
-                        self.controller.seconds = 59
+            #     if (self.controller.seconds == 0):
+            #         if (self.controller.minutes == 0):
+            #             self.controller.hours -= 1
+            #             self.controller.minutes = 59
+            #             self.controller.seconds = 59
+            #         else:
+            #             self.controller.minutes -= 1
+            #             self.controller.seconds = 59
                 
-                else:
-                    self.controller.seconds -= 1
+            #     else:
+            #         self.controller.seconds -= 1
 
-                if self.controller.hours < 10: self.hoursSpace = " " 
-                else: self.hoursSpace = ""
-                if self.controller.minutes < 10: self.minutesSpace = " " 
-                else: self.minutesSpace = ""
-                if self.controller.seconds < 10: self.secondsSpace = " " 
-                else: self.secondsSpace = ""
+            #     if self.controller.hours < 10: self.hoursSpace = " " 
+            #     else: self.hoursSpace = ""
+            #     if self.controller.minutes < 10: self.minutesSpace = " " 
+            #     else: self.minutesSpace = ""
+            #     if self.controller.seconds < 10: self.secondsSpace = " " 
+            #     else: self.secondsSpace = ""
 
-                seconds -= 1
-                time.sleep(1)
+            #     seconds -= 1
+            #     self.controller.update()
+            #     time.sleep(1)

@@ -12,6 +12,7 @@ class App(Tk):
         self.title("Countdown Timer")
         self.geometry("280x300")
         self.hours = self.minutes = self.seconds = 0
+        self.finished = False
 
         container = ttk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
@@ -25,6 +26,7 @@ class App(Tk):
             self.frames[page_name] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
+        self.finished = True
         self.showFrame("TimerSelectorPage")
 
 
